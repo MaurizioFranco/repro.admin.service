@@ -47,11 +47,15 @@ public class SurveyRepliesService {
 		surveyRepliesRepository.delete(surveyrepliesToDelete.getId());
 	}
 	
-	public SurveysReplies selectSurveyrepliesById(int id) {
+	public SurveysReplies selectSurveyrepliesById(long id) {
 		return surveyRepliesRepository.findById(id);
 	}
 	
 	public boolean updateSurveyReplies(SurveysReplies item) {
 		return surveyRepliesRepository.update(item);
+	}
+	
+	public boolean deleteSurveyRepliesById(long id) {
+		return surveyRepliesRepository.delete(id);
 	}
 }
