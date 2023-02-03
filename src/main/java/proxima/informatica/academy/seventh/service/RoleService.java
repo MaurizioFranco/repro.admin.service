@@ -46,7 +46,7 @@ public class RoleService {
 		return roleRepository.update(role) ;
 	}
 
-	public boolean deleteById(int id) {
+	public boolean deleteById(long id) {
 		return roleRepository.delete(id) ;
 	}
 
