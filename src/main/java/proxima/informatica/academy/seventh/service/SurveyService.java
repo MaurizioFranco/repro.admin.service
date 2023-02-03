@@ -45,7 +45,7 @@ public class SurveyService {
 		return response;
 	}
 	
-	public Surveys selectById(int id) {
+	public Surveys selectById(long id) {
 		Surveys surveyRetrieved = new Surveys();
 		surveyRetrieved = (Surveys)surveyRepository.findById((long)id);
 		return surveyRetrieved;
