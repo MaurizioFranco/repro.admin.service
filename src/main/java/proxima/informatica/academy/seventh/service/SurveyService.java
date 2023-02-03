@@ -37,7 +37,7 @@ public class SurveyService {
 		return surveyRepository.findAll();
 	}
 	
-	public boolean deleteSurvey(int id) {
+	public boolean deleteSurvey(long id) {
 		boolean response = false;
 		if (surveyRepository.delete(id)) {
 			response = true;
