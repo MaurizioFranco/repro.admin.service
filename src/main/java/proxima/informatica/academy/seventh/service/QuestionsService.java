@@ -35,7 +35,7 @@ public class QuestionsService {
 		return questionRepository.findAll();
 	}
 	
-	public Questions selectById(int id) {
+	public Questions selectById(long id) {
 		logger.debug("QuestionsService: Select by ID - START");
 		Questions question = null;
 		question = questionRepository.findById(id);
@@ -43,7 +43,7 @@ public class QuestionsService {
 		return question;
 	}
 	
-	public boolean deleteById(int id) {
+	public boolean deleteById(long id) {
 		return questionRepository.delete(id) ;
 	}
 	
