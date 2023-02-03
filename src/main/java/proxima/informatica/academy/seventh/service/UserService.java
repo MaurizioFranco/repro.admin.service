@@ -1,4 +1,4 @@
-package proxima.informatica.academy.seventh.services;
+package proxima.informatica.academy.seventh.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
