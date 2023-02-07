@@ -37,7 +37,7 @@ public class CandidatesService {
 
 	public Candidates selectById(long id) {
 		Candidates candidateRetrived = new Candidates();
-		candidateRetrived = (Candidates)candidateRepository.findById((long)id);
+		candidateRetrived = (Candidates)candidateRepository.findById(id);
 
 		return candidateRetrived;
 	}
