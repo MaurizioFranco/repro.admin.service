@@ -52,8 +52,16 @@ public class SurveyRepliesService {
 		return surveyRepliesRepository.findById(id);
 	}
 	
-	public boolean updateSurveyReplies(SurveysReplies item) {
-		return surveyRepliesRepository.update(item);
+	public SurveysReplies update(SurveysReplies item) {
+		boolean result = false;
+		SurveysReplies updateSurveyReplies = null;
+		logger.debug("update - START - item: " + item);
+        result = surveyRepliesRepository.update(item);
+        logger.debug("update - DEBUG - surveyRepliesUpdate: " + item);
+        if(result) {
+        	updateSurveyReplies = SurveyRepliesService.getInstance().selectSurveyrepliesById(item.getId());
+        }
+		return updateSurveyReplies;
 	}
 	
 	public boolean deleteSurveyRepliesById(long id) {
