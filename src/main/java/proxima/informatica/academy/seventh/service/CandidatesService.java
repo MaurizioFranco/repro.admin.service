@@ -27,12 +27,12 @@ public class CandidatesService {
 		return instance;
 	}
 
-	public boolean insertCandidates(Candidates candidate) {
-		boolean response = false;
-
-		if (candidateRepository.create(candidate) > 0)
-			response = true;
-		return response;
+	public Candidates insert(Candidates item) {
+		logger.debug("insert - START - item: " + item);
+        long insertedId = candidateRepository.create(item) ;
+        logger.debug("insert - DEBUG - insertedId: " + insertedId);
+        Candidates itemToReturn = selectById(insertedId);
+        return itemToReturn ;
 	}
 
 	public Candidates selectById(long id) {
