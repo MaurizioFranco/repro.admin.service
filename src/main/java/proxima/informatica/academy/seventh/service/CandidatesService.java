@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import centauri.academy.proxima.cerepro.entity.EntityInterface;
 import centauri.academy.proxima.cerepro.entity.Candidates;
+import centauri.academy.proxima.cerepro.entity.Candidates;
 import centauri.academy.proxima.cerepro.repository.CandidatesRepository;
 
 public class CandidatesService {
@@ -48,6 +49,16 @@ public class CandidatesService {
 
 	public boolean updateCandidates(Candidates candidate) {
 		return candidateRepository.update(candidate) ;
+	}
+	
+	public Candidates update(Candidates item) {
+		logger.debug("update - START - item: " + item);
+        boolean returnValue = candidateRepository.update(item) ;
+        logger.debug("update - DEBUG - updated result: " + returnValue);
+        if (returnValue) {
+        	return (Candidates)candidateRepository.findById(item.getId());
+        }
+        return null ;
 	}
 
 	public boolean deleteById(Long id) {
