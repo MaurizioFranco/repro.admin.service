@@ -47,26 +47,26 @@ public class QuestionsService {
 		return questionRepository.delete(id) ;
 	}
 	
-	public boolean insert(Questions question) {
+	public Questions insert(Questions question) {
 		logger.debug("QuestionsService: INSERT - START");
-		boolean response = false;
-		if (questionRepository.create(question)>1)
-			response = true;
-		logger.debug("QuestionsService: INSERT - END");
-		return response;
+		long response = questionRepository.create(question);
+		logger.debug("QuestionsService: DEBUG - response: " + response);
+		Questions questions = QuestionsService.getIstance().selectById(response);
+		logger.debug("QuestionsService: END");
+		return questions;
 	}
 	
 	
 	
-	public boolean updateQuestion(Questions qs) {
+	public Questions updateQuestion(Questions qs) {
 		logger.debug("QuestionsService: UPDATE - START");
 		boolean resultObj = false;
+		Questions question = null;
 		resultObj = questionRepository.update(qs);
-		logger.debug("QuestionsService: UPDATE - END");
-		if(resultObj == true)
-			return resultObj;
-
-		return resultObj;
+		logger.debug("QuestionsService: UPDATE - DEBUG - resultObj: " + resultObj);
+		if(resultObj)
+			question = QuestionsService.getIstance().selectById(qs.getId());
+		return question;
 	}
 
 }
