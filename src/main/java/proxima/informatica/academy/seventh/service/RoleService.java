@@ -52,8 +52,14 @@ public class RoleService {
 		return roleRepository.findAll();
 	}
 
-	public boolean updateRole(Roles role) {
-		return roleRepository.update(role) ;
+	public Roles update(Roles item) {
+		logger.debug("update - START - item: " + item);
+        boolean returnValue = roleRepository.update(item) ;
+        logger.debug("update - DEBUG - updated result: " + returnValue);
+        if (returnValue) {
+        	return (Roles)roleRepository.findById(item.getId());
+        }
+        return null ;
 	}
 
 	public boolean deleteById(long id) {
