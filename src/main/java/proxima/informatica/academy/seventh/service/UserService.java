@@ -1,6 +1,5 @@
 package proxima.informatica.academy.seventh.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,6 @@ public class UserService {
 
 	private final static Logger logger = LoggerFactory.getLogger(UserService.class);
 	
-//	private final String USER_EMAIL = "dllgiacomo@gmail.com";
-
 	UserRepository userRepository = null ;
 	
 	private UserService() {
@@ -59,7 +56,7 @@ public class UserService {
 		return result;
 	}
 
-	public boolean insert(User user) {
+	public boolean insertFromRegistration(User user) {
 		boolean response = false;
 		String host = null;
 		String port = null;
@@ -69,7 +66,7 @@ public class UserService {
 			port = PropertiesManagerSingleton.getInstance().getProperty("properties.port");
 			home = PropertiesManagerSingleton.getInstance().getProperty("properties.home");		
 		}catch (Exception e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		
 		try {
@@ -83,19 +80,27 @@ public class UserService {
 				response = true;
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return response;
 	}
+	
+	public User insert(User item) {
+		logger.debug("insert - START - item: " + item);
+        long insertedId = userRepository.create(item) ;
+        logger.debug("insert - DEBUG - insertedId: " + insertedId);
+        User itemToReturn = selectById(insertedId);
+        return itemToReturn ;
+	}
 
-	public User selectById(int id) {
+	public User selectById(long id) {
 		User userRetrived = new User();
 		userRetrived = (User)userRepository.findById(id);
 
 		return userRetrived;
 	}	
 
-	public List<EntityInterface> getAllUsers() {
+	public List<EntityInterface> getAll() {
 		return userRepository.findAll();
 	}
 	
@@ -107,13 +112,14 @@ public class UserService {
 		return listUsers;
 	}
 
-	public boolean updateUser(User user) {
-		boolean response = false;
-
-		if (userRepository.update(user))
-			response = true;
-
-		return response;
+	public User update(User item) {
+		logger.debug("update - START - item: " + item);
+        boolean returnValue = userRepository.update(item) ;
+        logger.debug("update - DEBUG - updated result: " + returnValue);
+        if (returnValue) {
+        	return (User)userRepository.findById(item.getId());
+        }
+        return null ;
 	}
 
 	public boolean deleteById(int id) {
