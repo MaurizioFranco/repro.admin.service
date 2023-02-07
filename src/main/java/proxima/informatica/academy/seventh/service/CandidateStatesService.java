@@ -47,7 +47,7 @@ public class CandidateStatesService {
 		return response;
 	}
 	
-	public CandidateStates selectById(int id) {
+	public CandidateStates selectById(long id) {
 		CandidateStates candidateRetrived = new CandidateStates();
 		candidateRetrived = (CandidateStates)candidateStatesRepository.findById(id);
 
@@ -76,7 +76,7 @@ public class CandidateStatesService {
 		return candidateStatesRepository.findAll();
 	}
 	
-	public boolean deleteById(int id) {
+	public boolean deleteById(Long id) {
 		return candidateStatesRepository.delete(id) ;
 	}
 
