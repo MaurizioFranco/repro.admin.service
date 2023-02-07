@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.LoggerFactory;
 
 import centauri.academy.proxima.cerepro.entity.EntityInterface;
+import centauri.academy.proxima.cerepro.entity.Roles;
 import centauri.academy.proxima.cerepro.entity.SurveysReplies;
 import centauri.academy.proxima.cerepro.repository.SurveyRepliesRepository;
 
@@ -28,12 +29,12 @@ public class SurveyRepliesService {
 		return instance;
 	}
 	
-	public boolean insertSurveyreplies(SurveysReplies surveyrepliesToInsert) {
-		boolean response = false;
-		if(surveyRepliesRepository.create(surveyrepliesToInsert)>1) {
-			response = true;
-		}
-		return response;
+	public SurveysReplies insert(SurveysReplies item) {
+		logger.debug("insert - START - item: " + item);
+        long insertedId = surveyRepliesRepository.create(item) ;
+        logger.debug("insert - DEBUG - insertedId: " + insertedId);
+        SurveysReplies itemToReturn = selectSurveyrepliesById(insertedId);
+        return itemToReturn ;
 	}
 	
 //	public List<SurveyReplies> selectAllSurveyreplies() {
