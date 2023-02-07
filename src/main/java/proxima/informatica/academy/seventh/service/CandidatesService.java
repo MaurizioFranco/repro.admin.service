@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import centauri.academy.proxima.cerepro.entity.EntityInterface;
 import centauri.academy.proxima.cerepro.entity.Candidates;
-import centauri.academy.proxima.cerepro.entity.Candidates;
 import centauri.academy.proxima.cerepro.repository.CandidatesRepository;
 
 public class CandidatesService {
