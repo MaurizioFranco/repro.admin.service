@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import centauri.academy.proxima.cerepro.entity.CandidateStates;
 import centauri.academy.proxima.cerepro.entity.EntityInterface;
+import centauri.academy.proxima.cerepro.entity.Roles;
 import centauri.academy.proxima.cerepro.repository.CandidateStatesRepository;
 
 /**
@@ -32,25 +33,28 @@ public class CandidateStatesService {
 		return instance;
 	}
 
-	public boolean update(CandidateStates candidate) {
-		boolean response = false;
-		if (candidateStatesRepository.update(candidate)!=false) 
-			response = true;	
-		return response;
+	public CandidateStates update(CandidateStates item) {
+		logger.debug("update - START - item: " + item);
+        boolean returnValue = candidateStatesRepository.update(item) ;
+        logger.debug("update - DEBUG - updated result: " + returnValue);
+        if (returnValue) {
+        	return (CandidateStates)candidateStatesRepository.findById(item.getId());
+        }
+        return null ;
 	}
 	
 	
-	public boolean insert(CandidateStates candidate) {
-		boolean response = false;
-		if (candidateStatesRepository.create(candidate)>1)
-			response = true;
-		return response;
+	public CandidateStates insert(CandidateStates item) {
+		logger.debug("insert - START - item: " + item);
+        long insertedId = candidateStatesRepository.create(item) ;
+        logger.debug("insert - DEBUG - insertedId: " + insertedId);
+        CandidateStates itemToReturn = selectById(insertedId);
+        return itemToReturn ;
 	}
 	
 	public CandidateStates selectById(long id) {
 		CandidateStates candidateRetrived = new CandidateStates();
 		candidateRetrived = (CandidateStates)candidateStatesRepository.findById(id);
-
 		return candidateRetrived;
 	}
 
