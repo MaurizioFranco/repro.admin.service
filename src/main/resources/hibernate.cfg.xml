@@ -26,5 +26,6 @@
 		<mapping class="centauri.academy.proxima.cerepro.entity.NoteTemplate" />
 		<mapping class="centauri.academy.proxima.cerepro.entity.CandidateStates" />
 		<mapping class="centauri.academy.proxima.cerepro.entity.CoursePage" />
+		<mapping class="centauri.academy.proxima.cerepro.entity.Candidates" />
 	</session-factory>
 </hibernate-configuration>
